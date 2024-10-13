@@ -1,0 +1,120 @@
+
+
+//admin side
+const WorkoutSchema = new mongoose.Schema({
+    workout_title: {
+        type: String,
+        required: true
+    },
+
+    { timestamps: true },
+
+    training_week:{
+        type: String,
+        required: true
+    },
+    users:{
+        type: String
+        user_id: [users]
+    }
+    notes: {
+        type: String,
+        required: false
+    }
+    exercises: {[
+        type: Array,
+        // title: 
+        // exercise_id: [ ]
+    ]}
+}, { timestamps: true })
+
+const ExerciseSchema = new mongoose.Schema({
+    exercise_title: {
+        type: String,
+        required: true
+    },
+    sets: {
+        type: number
+        required: false
+    },
+    repetitions: {
+        type: number
+        required: false
+    },
+    weight: {
+        type: number
+        required: false
+    },
+    target_muscle: {
+        type: String,
+        required: false
+    },
+    description: {
+        type: string,
+        required: true
+    },
+    video: {
+        type: String,
+        required: false,
+    }
+
+})
+
+
+const UserSchema = new mongoose.Schema({ 
+    name: {
+        type: String,
+        required: true
+    },
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+    metrics: {
+        age: {
+            type: Number,
+        required: true
+        }
+        weight: {
+            type: String,
+            required: true
+        },
+        height: {
+            type: String,
+            required: true
+        },
+        waist_circumference: {
+            type: String,
+            required: false
+        },
+    }
+
+    goals: {
+        type: Array,
+        required: true
+    }
+    progress_photos: {
+        type: String
+        //Cloudinary
+        required: false
+    },
+    eval_notes: {
+        type: String,
+        required: false
+    }
+
+
+
+
+    //if we include some of their stats....
+    max_squat: {
+        type: Number,
+        required: false
+    }
+
+
+})

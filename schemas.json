@@ -2,57 +2,68 @@
 
 //admin side
 const WorkoutSchema = new mongoose.Schema({
+    // Set by coach? User editable - edit form?
+    scheduled_date: {
+        type: Date,
+    }    
+    // If null then red on calendar, if not make green?
+    completed_date: {
+        type: Date
+    }
+    // name of the workout eg 'shoulder joy'
     workout_title: {
         type: String,
         required: true
     },
-
-    { timestamps: true },
-
-    training_week:{
-        type: String,
-        required: true
-    },
-    users:{
-        type: String
-        user_id: [users]
+    // Links to assigned user
+    user_id : {
+        type: ObjectId
     }
-    notes: {
-        type: String,
-        required: false
+    // Always by Emily for now - allows flexibility in future?
+    trainer_id: {
+        type: ObjectId
     }
+    // written by trainer, show to user in front end?
+    trainer_notes: {
+        type: String,
+        required: false,
+    }
+    // user reflection on workout
+    user_notes: {
+        type: String,
+        reqiured: false,
+    }
+    // squat, 10x20kg
+    // squat, 12x25kg
+    // [{id, reps, sets, weight, completed}]
     exercises: {[
         type: Array,
         // title: 
         // exercise_id: [ ]
     ]}
-}, { timestamps: true })
+}
+{ timestamps: true },
+)
 
 const ExerciseSchema = new mongoose.Schema({
+    _id: {
+        type: ObjectId,
+        required: true
+    }
     exercise_title: {
         type: String,
         required: true
     },
-    sets: {
-        type: number
-        required: false
-    },
-    repetitions: {
-        type: number
-        required: false
-    },
-    weight: {
-        type: number
-        required: false
-    },
+    // array holding the target muscles
     target_muscle: {
-        type: String,
+        type: [String],
         required: false
     },
-    description: {
-        type: string,
+    instructions: {
+        type: String,
         required: true
     },
+    // YouTube link?
     video: {
         type: String,
         required: false,
@@ -62,10 +73,15 @@ const ExerciseSchema = new mongoose.Schema({
 
 
 const UserSchema = new mongoose.Schema({ 
+    _id: {
+        type: ObjectId,
+        required: true
+    }
     name: {
         type: String,
         required: true
     },
+    // Depends what auth needs to store
     username: {
         type: String,
         required: true
@@ -73,6 +89,15 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
+    }
+    // admin / client / coach
+    role : {
+        type: String,
+        required: true
+    },
+    // which clients are linked to this admin / coach?
+    associated_clients: {
+        type: [ObjectId]
     }
     metrics: {
         age: {
@@ -92,29 +117,27 @@ const UserSchema = new mongoose.Schema({
             required: false
         },
     }
+    //array of all of the workout IDs done
+    Workout_history: {
+        type: Array,
+        required: true
+    }
 
+    // Array of objects -> each object stores date goal was set, the goal itself as a string and a date completed (if null then not completed)
     goals: {
         type: Array,
         required: true
     }
+    //array of objects, {date it was added and a link}
     progress_photos: {
-        type: String
+        type: Array
         //Cloudinary
         required: false
     },
+    // array of objects {date, string of written info about that note}
     eval_notes: {
-        type: String,
+        type: Array,
         required: false
     }
-
-
-
-
-    //if we include some of their stats....
-    max_squat: {
-        type: Number,
-        required: false
-    }
-
 
 })

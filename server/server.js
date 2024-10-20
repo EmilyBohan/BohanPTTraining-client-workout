@@ -70,5 +70,5 @@ app.use("/", mainRoutes);
 
 // Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is runningon PORT 5050");
+  console.log("Server is running on PORT 5050");
 });

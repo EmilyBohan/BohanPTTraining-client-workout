@@ -1,5 +1,7 @@
 // const cloudinary = require("../middleware/cloudinary");
-const { ObjectId } = require("mongodb");
+
+// Commented out as not used in this file
+// const { ObjectId } = require("mongodb");
 
 module.exports = {
   getProfile: async (req, res) => {

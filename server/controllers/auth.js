@@ -95,12 +95,10 @@ exports.postSignup = (req, res, next) => {
           .json({ message: "Server error occured during user lookup." });
       }
       if (existingUser) {
-        return res
-          .status(409)
-          .json({
-            message:
-              "Account with that email address or username already exists.",
-          });
+        return res.status(409).json({
+          message:
+            "Account with that email address or username already exists.",
+        });
       }
 
       // Save the new user

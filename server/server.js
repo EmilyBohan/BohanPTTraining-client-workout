@@ -4,13 +4,10 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const MongoStore = require("connect-mongo");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
-
-// Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
 
 // Passport config
 require("./config/passport")(passport);
@@ -53,7 +50,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    store: MongoStore.create({ mongoUrl: process.env.DB_STRING }),
     cookie: {
       sameSite: "none",
       secure: true,
@@ -70,5 +67,5 @@ app.use("/", mainRoutes);
 
 // Server Running
 app.listen(process.env.PORT, () => {
-  console.log("Server is runningon PORT 5050");
+  console.log("Server is running on PORT 5050");
 });

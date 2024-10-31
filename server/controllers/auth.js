@@ -1,9 +1,9 @@
-const passport = require("passport");
-const validator = require("validator");
-const User = require("../models/User");
+import passport from "passport";
+import validator from "validator";
+import { User } from "../models/User.js";
 
 // When user logs in with their account
-exports.postLogin = (req, res, next) => {
+export function postLogin(req, res, next) {
   const validationErrors = [];
 
   // Validate email format
@@ -41,10 +41,10 @@ exports.postLogin = (req, res, next) => {
         .json({ user: { userName: user.userName, email: user.email } }); // If successful, return the user details as a JSON response
     });
   })(req, res, next);
-};
+}
 
 // When user logs out
-exports.logout = (req, res) => {
+export function logout(req, res) {
   req.logout(() => {
     res.status(200).json({ message: "User has logged out." });
   });
@@ -52,10 +52,10 @@ exports.logout = (req, res) => {
     if (err) res.status(500).json({ message: err });
     req.user = null;
   });
-};
+}
 
 // When user signs up with a brand new account
-exports.postSignup = (req, res, next) => {
+export function postSignup(req, res, next) {
   const validationErrors = [];
 
   // Validate email format
@@ -121,4 +121,4 @@ exports.postSignup = (req, res, next) => {
       });
     },
   );
-};
+}

@@ -1,9 +1,10 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const authController = require("../controllers/auth");
-const postsController = require("../controllers/posts");
-const homeController = require("../controllers/home");
-const { ensureAuth, ensureGuest } = require("../middleware/auth");
+
+import * as authController from "../controllers/auth.js";
+import * as postsController from "../controllers/posts.js";
+import * as homeController from "../controllers/home.js";
+import { ensureAuth, ensureGuest } from "../middleware/auth.js";
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex);
@@ -12,4 +13,4 @@ router.post("/login", authController.postLogin);
 router.get("/logout", authController.logout);
 router.post("/signup", authController.postSignup);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,3 @@
-module.exports = {
-  getIndex: (req, res) => {
-    res.send("this is the index");
-  },
-};
+export function getIndex(req, res) {
+  res.send("this is the index");
+}

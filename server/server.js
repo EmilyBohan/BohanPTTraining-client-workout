@@ -1,16 +1,17 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import passport from "passport";
+import session from "express-session";
+import MongoStore from "connect-mongo";
+import logger from "morgan";
+import { connectDB } from "./config/database.js";
+import configurePassport from "./config/passport.js";
+import mainRoutes from "./routes/main.js";
 const app = express();
-const cors = require("cors");
-const mongoose = require("mongoose");
-const passport = require("passport");
-const session = require("express-session");
-const MongoStore = require("connect-mongo");
-const logger = require("morgan");
-const connectDB = require("./config/database");
-const mainRoutes = require("./routes/main");
 
 // Passport config
-require("./config/passport")(passport);
+configurePassport(passport);
 
 // Connect To Database
 connectDB();

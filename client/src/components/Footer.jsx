@@ -1,9 +1,9 @@
-const Navbar = () => {
+const Footer = () => {
   return (
     <div className="bg-gray-600 h-32 text-center text-3xl text-white">
-      Navbar
+      Footer
     </div>
   );
 };
 
-export default Navbar;
+export default Footer;

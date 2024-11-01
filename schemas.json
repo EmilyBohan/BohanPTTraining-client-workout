@@ -78,7 +78,18 @@ const UserSchema = new mongoose.Schema({
         required: true
     }
     name: {
+        firstname: { 
+            type: String, 
+            required: true 
+        },
+        lastname: {
+            type: String, 
+            required: true 
+        }
+    },
+    email: {
         type: String,
+        unique: true,
         required: true
     },
     // Depends what auth needs to store
@@ -88,12 +99,14 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        // Google doesn't return any password
+        required: false
     }
     // admin / client / coach
-    role : {
+    role: {
         type: String,
-        required: true
+        default: 'client',
+        required: true,
     },
     // which clients are linked to this admin / coach?
     associated_clients: {
@@ -102,18 +115,18 @@ const UserSchema = new mongoose.Schema({
     metrics: {
         age: {
             type: Number,
-        required: true
+            required: true,
         }
         weight: {
-            type: String,
-            required: true
+            type: Number,
+            required: true,
         },
         height: {
-            type: String,
-            required: true
+            type: Number,
+            required: true,
         },
         waist_circumference: {
-            type: String,
+            type: Number,
             required: false
         },
     }

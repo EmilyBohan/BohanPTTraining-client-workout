@@ -19,6 +19,7 @@
     "concurrently": "^7.6.0",
     "connect-mongo": "^5.1.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.21.1",
     "express-flash": "^0.0.2",
     "express-override": "^0.1.9",
@@ -26,6 +27,7 @@
     "mongoose": "^8.7.2",
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "validator": "^13.9.0"
   },

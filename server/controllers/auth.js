@@ -2,6 +2,19 @@ import passport from "passport";
 import validator from "validator";
 import { User } from "../models/User.js";
 
+
+//Google auth pathway
+export function googleAuth(req, res, next){
+  passport.authenticate('google', { scope: ['profile'] })
+};
+export function googleCallback(req, res, next){
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  }
+};
+
 // When user logs in with their account
 export function postLogin(req, res, next) {
   const validationErrors = [];

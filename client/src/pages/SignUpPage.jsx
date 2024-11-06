@@ -1,11 +1,15 @@
-import SignUpForm from "../components/forms/SignUpForm";
+import Navbar from "../components/NavBar";
+import Footer from "../components/Footer";
+import { Outlet } from "react-router-dom";
 
-const SignUpPage = () => {
+const MainLayout = () => {
   return (
-    <div className="my-32 mx-auto flex flex-col justify-center px-6 pt-8 md:justify-start lg:w-[28rem]">
-      <SignUpForm />
-    </div>
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
   );
 };
 
-export default SignUpPage;
+export default MainLayout;

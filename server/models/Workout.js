@@ -1,6 +1,50 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
+// Example workout data
+const dummyWorkout = {
+  scheduled_date: "2023-12-01T09:00:00Z",
+  workout_title: "Upper Body Strength",
+  user_id: "64b8fa0c1a5f3b001a67cd01",
+  trainer_id: "64b8fa0c1a5f3b001a67cd02",
+  exercises: [
+    {
+      exercise_id: "64b8fa0c1a5f3b001a67cd10", // Refers to an Exercise document
+      sets: [
+        {
+          reps: 10,
+          weight: 100,
+          completed: true,
+          notes: "Felt strong on this set",
+        },
+        {
+          reps: 8,
+          weight: 105,
+          completed: true,
+          notes: "Pushed to the limit",
+        },
+      ],
+    },
+    {
+      exercise_id: "64b8fa0c1a5f3b001a67cd11", // Another Exercise document
+      sets: [
+        {
+          reps: 12,
+          weight: 50,
+          completed: false,
+          notes: "Struggled with the weight",
+        },
+        {
+          reps: 10,
+          weight: 50,
+          completed: false,
+          notes: "Reduced reps due to fatigue",
+        },
+      ],
+    },
+  ],
+};
+
 const SetSchema = new Schema({
   reps: {
     type: Number,

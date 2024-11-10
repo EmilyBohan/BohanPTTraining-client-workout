@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
+// Example exercise data
+const dummyExercise = {
+  _id: "6342e0a1f5a1b9001b7c8d9e",
+  exercise_title: "Bench Press",
+  target_muscle: ["chest", "arms"],
+  instructions:
+    "Lie on the bench with feet flat on the ground, grip the bar, and press it upwards until arms are fully extended.",
+  video: "https://youtube.com/watch?v=example",
+  createdAt: "2024-08-01T09:00:00.000Z",
+  updatedAt: "2024-09-05T11:15:00.000Z",
+};
+
 const ExerciseSchema = new Schema(
   {
     // Exercise name

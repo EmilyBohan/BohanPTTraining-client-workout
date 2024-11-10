@@ -2,6 +2,57 @@ import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 const { Schema, model } = mongoose;
 
+// Example user data
+const dummyUser = {
+  _id: "6341a1234abcd5678ef0d0c3",
+  name: {
+    firstname: "Jane",
+    lastname: "Doe",
+  },
+  email: "janedoe@example.com",
+  username: "jane_doe",
+  role: "client",
+  isGoogleAuth: false,
+  associated_clients: ["6341b4567efg1234hij0d0a1"], // Only if the user is a coach
+  metrics: {
+    age: 28,
+    weight: 150, // in lbs
+    height: {
+      feet: 5,
+      inches: 7,
+    },
+    waist_circumference: 32,
+  },
+  workout_history: ["6341a8f4b2d94b001b23d4e5"],
+  goals: [
+    {
+      _id: "6343a1234abc9876df8e0d0c",
+      set_date: "2024-10-01T08:00:00.000Z",
+      description: "Run a 5K",
+      completed_date: null,
+      target_date: "2024-12-01T08:00:00.000Z",
+    },
+  ],
+  progress_photos: [
+    {
+      _id: "6344a1b5f5a1b9001c8c9e0d",
+      date_added: "2024-09-10T10:00:00.000Z",
+      photo_url: "https://example.com/photos/janedoe/2024-09-10.jpg",
+      notes: "First progress photo",
+    },
+  ],
+  eval_notes: [
+    {
+      _id: "6345c1d2e6f7a8b9009d1c0e",
+      date: "2024-10-15T14:30:00.000Z",
+      note: "Great improvement in endurance",
+      written_by: "6341b4567efg1234hij0d0a1", // ID of the coach
+    },
+  ],
+  createdAt: "2024-08-15T12:00:00.000Z",
+  updatedAt: "2024-10-20T12:30:00.000Z",
+};
+
 // Sub-documents https://mongoosejs.com/docs/subdocs.html
 const GoalSchema = new Schema({
   // When the goal was set

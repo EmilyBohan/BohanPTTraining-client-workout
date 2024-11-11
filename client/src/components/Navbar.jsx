@@ -1,116 +1,65 @@
-import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
+import { IoFitness } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import InputForm from "./InputForm";
+import { useState } from "react";
 
-const SignUpForm = () => {
-
-  // form inputs states
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const serverURL = import.meta.env.VITE_APP_API_URL
-
-  // function that runs when the form is submitted
-  const handleSignUp = async (e) => {
-    e.preventDefault();
-    const credentials = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-
-    console.log(
-      `fetch to the backend to make the login using these credentials: ${Object.values(credentials)}`,
-    );
-
-    const response = await fetch(`${serverURL}/signup`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
-
-    const data = await response.json();
-    console.log(data)
+const Navbar = () => {
+  const [navOpen, setNavOpen] = useState(false);
+  const toggleNavBar = () => {
+    setNavOpen(() => !navOpen);
   };
+  const linkClass = "text-gray-800 text-lg mb-5 lg:mb-0";
 
   return (
-    <form className="space-y-6" onSubmit={handleSignUp}>
-      <h2 className="text-xl text-center font-medium text-gray-900">Sign Up</h2>
-      <InputForm
-        name="firstName"
-        type="text"
-        label="First Name"
-        value={firstName}
-        setState={setFirstName}
-        required={true}
-      />
-      <InputForm
-        name="lastName"
-        type="text"
-        label="Last Name"
-        value={lastName}
-        setState={setLastName}
-        required={true}
-      />
-      <InputForm
-        name="email"
-        type="email"
-        label="Email"
-        value={email}
-        setState={setEmail}
-        required={true}
-      />
-      <InputForm
-        name="password"
-        type="password"
-        label="Password"
-        value={password}
-        setState={setPassword}
-        required={true}
-      />
-      <InputForm
-        name="confirmPassword"
-        type="password"
-        label="Confirm Password"
-        value={confirmPassword}
-        setState={setConfirmPassword}
-        required={true}
-      />
-      <button
-        type="submit"
-        className="px-4 py-2 w-full border flex justify-center items-center bg-primary text-white gap-2 rounded-lg hover:bg-white hover:text-primary hover:border-primary hover:shadow transition duration-150"
-      >
-        Sign Up
-      </button>
-      <div className="relative">
-        <span className="block w-full h-px bg-gray-300"></span>
-        <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
-          Or continue with
-        </p>
-      </div>
-      <a
-        className="px-4 py-2 border flex justify-center items-center bg-white text-primary gap-2 rounded-lg border-primary hover:shadow transition duration-150"
-        href="serverurl/profile"
-      >
-        <FcGoogle size={20} />
-        <span>Sign up with Google</span>
-      </a>
-      <div className="text-sm font-medium text-gray-500 ">
-        Already have an account?{" "}
-        <Link to="/" className="text-primary hover:underline">
-          Login
+    <nav
+      className={`${navOpen ? "h-auto" : "h-[106px]"} overflow-hidden lg:h-auto px-7 md:px-14 lg:px-28 flex-wrap lg:flex items-center 
+      py-6 xl:relative z-10 border-b-2 lg:border-b-0 fixed top-0 right-0 left-0 bg-white lg:bg-transparent lg:static`}
+    >
+      <div className="flex items-center justify-between mb-0 h-full">
+        <Link to="/" className="hover:text-primary flex items-center text-3xl">
+          <IoFitness />
+          <h2 className="font-Playwrite">Bohan PT</h2>
         </Link>
+        <button
+          onClick={toggleNavBar}
+          aria-label={
+            navOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          className="lg:hidden w-10 h-10 ml-auto flex items-center justify-center text-primary border border-primary rounded-md"
+        >
+          <IoMenu size={25} />
+        </button>
       </div>
-    </form>
+      <ul
+        className={`lg:flex flex-col lg:flex-row lg:items-center lg:mx-auto lg:space-x-8 xl:space-x-16
+        transform transition-all duration-500 overflow-hidden mt-9 lg:mt-0
+        ${navOpen ? "max-h-[500px]" : "max-h-0 lg:max-h-none"}`}
+      >
+        <li className={linkClass}>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+        <li className={linkClass}>
+          <Link to="/metrics">Metrics</Link>
+        </li>
+        <li className={linkClass}>
+          <Link to="/#map">Map</Link>
+        </li>
+        <li className={linkClass}>
+          <Link to="/#faq">Faq</Link>
+        </li>
+        <li className={linkClass}>
+          <Link to="/contact"></Link>
+        </li>
+      </ul>
+      <a
+        target="_blank"
+        className={`px-5 py-3 border-2 hover:border-primary rounded-lg font-semibold hover:text-primary hover:bg-white text-lg bg-primary text-white transition ease-linear duration-500 
+        ${navOpen === false && "hidden lg:block"}`}
+      >
+        Contact
+      </a>
+    </nav>
   );
 };
 
-export default SignUpForm;
+export default Navbar;

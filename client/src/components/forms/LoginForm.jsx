@@ -3,8 +3,10 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import InputForm from "./InputForm";
 
+const serverURL = import.meta.env.VITE_APP_API_URL;
+
 const LoginForm = () => {
-  // form states
+  // form inputs states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,6 +21,18 @@ const LoginForm = () => {
     console.log(
       `fetch to the backend to make the login using these credentials: ${Object.values(credentials)}`,
     );
+
+    const response = await fetch(`${serverURL}/login`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    const data = await response.json();
+    console.log(data);
   };
 
   return (

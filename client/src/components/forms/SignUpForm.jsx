@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import InputForm from "./InputForm";
 
 const SignUpForm = () => {
-  // form states
+  // form inputs states
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const serverURL = import.meta.env.VITE_APP_API_URL;
 
   // function that runs when the form is submitted
   const handleSignUp = async (e) => {
@@ -25,6 +26,18 @@ const SignUpForm = () => {
     console.log(
       `fetch to the backend to make the login using these credentials: ${Object.values(credentials)}`,
     );
+
+    const response = await fetch(`${serverURL}/signup`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    const data = await response.json();
+    console.log(data);
   };
 
   return (

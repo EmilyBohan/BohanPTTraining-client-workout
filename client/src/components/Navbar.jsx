@@ -52,11 +52,11 @@ const Navbar = () => {
         </li>
       </ul>
       <a
-        target="_blank"
-        className={`px-5 py-3 border-2 hover:border-primary rounded-lg font-semibold hover:text-primary hover:bg-white text-lg bg-primary text-white transition ease-linear duration-500 
-        ${navOpen === false && "hidden lg:block"}`}
+       href="/contact"
+      className={`px-5 py-3 border-2 hover:border-primary rounded-lg font-semibold hover:text-primary hover:bg-white text-lg bg-primary text-white transition ease-linear duration-500 
+      ${navOpen === false && "hidden lg:block"}`}
       >
-        Contact
+      Contact
       </a>
     </nav>
   );

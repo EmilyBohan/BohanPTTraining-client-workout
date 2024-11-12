@@ -13,6 +13,7 @@ import DashboardPage from "./pages/DashboardPage";
 import MetricsPage from "./pages/MetricsPage";
 import TrainingPage from "./pages/TrainingPage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ContactPage from "./pages/ContactPage";
 
 import MainLayout from "./layouts/MainLayout";
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/metrics" element={<MetricsPage />} />
           <Route path="/training" element={<TrainingPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </>,

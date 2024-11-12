@@ -17,8 +17,12 @@ const Navbar = () => {
     >
       <div className="flex items-center justify-between mb-0 h-full">
         <Link to="/" className="hover:text-primary flex items-center text-3xl">
-          <IoFitness />
-          <h2 className="font-Playwrite">Bohan PT</h2>
+        <img
+            src="/src/assets/images/Bohan.png"
+            alt="Logo"
+            className="h-12 w-auto"
+          />
+          <h2 className="font-Playwrite">Bohan PT & Training</h2>
         </Link>
         <button
           onClick={toggleNavBar}

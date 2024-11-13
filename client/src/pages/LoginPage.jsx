@@ -5,7 +5,12 @@ const LoginPage = () => {
     <>
       <div className="flex w-screen flex-wrap text-slate-800 mt-[106px] md:mt-0 pb-20 md:pb-0">
         <div className="relative hidden h-screen select-none flex-col justify-center bg-primary text-center md:flex md:w-1/2">
-          <div className="mx-auto py-16 px-8 text-white xl:w-[40rem]"></div>
+          <div className="absolute inset-0"></div>
+          <img 
+              src="/src/assets/images/workoutlaptop.jpeg" 
+              alt="photo of workout equipment and laptop" 
+              className="w-full h-full object-cover"
+            />
         </div>
         <div className="flex w-full flex-col md:w-1/2">
           <div className="flex justify-center pt-12 md:justify-start md:pl-12">

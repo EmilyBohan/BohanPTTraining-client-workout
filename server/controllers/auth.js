@@ -1,20 +1,27 @@
 import passport from "passport";
 import validator from "validator";
 import { User } from "../models/User.js";
+import {configurePassport} from "../config/passport.js"
 
 
 //Google auth pathway
-export function googleAuth(req, res, next){
-  passport.authenticate('google', { scope: ['profile'] })
+export function googleAuth(req, res,next){
+  passport.authenticate('google', { scope: ['profile'] })(req,res,next)
 };
 export function googleCallback(req, res, next){
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  }
-};
-
+  passport.authenticate('google', { failureRedirect: '/login' }, (err, user, info)=> {
+    if (err || !user) {
+      return res.redirect('http://localhost:5173/');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      // Successful authentication, redirect home.
+      res.redirect('http://localhost:5173/');
+    });
+  })(req, res, next);
+  };
 // When user logs in with their account
 export function postLogin(req, res, next) {
   const validationErrors = [];

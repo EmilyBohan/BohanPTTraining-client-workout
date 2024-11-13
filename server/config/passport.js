@@ -2,7 +2,8 @@ import LocalStrategy from "passport-local";
 import GoogleStrategy from "passport-google-oauth20"
 import { User } from "../models/User.js";
 
-function configurePassport(passport) {
+
+export function configurePassport(passport) {
   passport.use(
     // Configuring Passport to use Local Strategy for authentication
     new LocalStrategy({ usernameField: "email" }, (email, password, done) => {
@@ -40,16 +41,18 @@ function configurePassport(passport) {
   );
 
   //Google Strategy 
-  passport.use(new GoogleStrategy({
+  passport.use(new GoogleStrategy(
+    {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: "http://localhost:5050/auth/google/callback"
-  },
+    },
   function(accessToken, refreshToken, profile, cb) {
     User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
   }
+  
 ));
   passport.serializeUser((user, done) => {
     // Serializing user to store in session
@@ -59,6 +62,35 @@ function configurePassport(passport) {
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => done(err, user));
   });
+
+  // passport.use(
+  //   new GoogleStrategy(
+  //     {
+  //       clientID: process.env.GOOGLE_CLIENT_ID,
+  //       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  //       callbackURL: "http://localhost:5050/auth/google/callback"
+  //     },
+  //     async (accessToken, refreshToken, profile, done) => {
+  //         const newUser = {
+  //             googleId: profile.id,
+  //             userName: profile.displayName,
+  //         }
+  //         try{
+  //             let user = await User.findOne({ googleId: profile.id })
+  //             if(user){
+  //                 done(null, user)
+  //             } else{
+  //                 user = await User.create(newUser)
+  //                 done(null, user)
+  //             }
+  //         } catch(err){
+  //             console.error(err)
+  //         }
+  //     }
+  //   )
+  // )
+ 
+
 }
 
 export default configurePassport;

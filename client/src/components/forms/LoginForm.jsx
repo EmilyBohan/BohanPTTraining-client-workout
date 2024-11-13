@@ -68,7 +68,7 @@ const LoginForm = () => {
       </div>
       <a
         className="px-4 py-2 border flex justify-center items-center bg-white text-primary gap-2 rounded-lg border-primary hover:shadow transition duration-150"
-        href="serverurl/profile"
+        href="http://localhost:5050/auth/google"
       >
         <FcGoogle size={20} />
         <span>Login with Google</span>

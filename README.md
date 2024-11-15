@@ -39,6 +39,7 @@ This template provides a starting point for developing full-stack web applicatio
 - TailwindCSS
 - Cloudinary
 - Passport-Local
+-Google Auth 
 
 ## Setup
 

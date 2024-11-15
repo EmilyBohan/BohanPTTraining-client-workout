@@ -9,6 +9,9 @@ import { connectDB } from "./config/database.js";
 import configurePassport from "./config/passport.js";
 import mainRoutes from "./routes/main.js";
 const app = express();
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Passport config
 configurePassport(passport);
@@ -16,27 +19,35 @@ configurePassport(passport);
 // Connect To Database
 connectDB();
 
-// Allow CORS for multiple origins
-const allowedOrigins = [
-  "http://localhost:5173", // Your local development URL
-  "https://mern-template-rt27.onrender.com", // Replace with your Vercel deployment URL
-  "https://mern-template-client.onrender.com",
-];
+// // Allow CORS for multiple origins
+// const allowedOrigins = [
+//   "http://localhost:5173", // Your local development URL
+//   "https://mern-template-rt27.onrender.com", // Replace with your Vercel deployment URL
+//   "https://mern-template-client.onrender.com",
+// ];
 
-const corsOptions = {
-  origin: function (origin, callback) {
-    console.log("Origin:", origin); // Add this line to debug the origin
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      console.log("Not allowed by CORS:", origin); // Add this line to debug rejected origins
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     console.log("Origin:", origin); // Add this line to debug the origin
+//     if (allowedOrigins.includes(origin) || !origin) {
+//       callback(null, true);
+//     } else {
+//       console.log("Not allowed by CORS:", origin); // Add this line to debug rejected origins
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET, POST, PUT, DELETE',
+    credentials: true,
+  })
+);
 
 // Body Parsing
 app.use(express.urlencoded({ extended: true }));
